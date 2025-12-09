@@ -1,3 +1,13 @@
+"""MCQ Helper - Clipboard-based MCQ Question Solver.
+
+This module monitors the system clipboard for multiple choice questions and
+automatically sends them to the backend API for solving. It displays answers
+as desktop notifications.
+
+Attributes:
+    API_URL (str): The URL of the backend FastAPI endpoint for MCQ solving.
+    last_text (str): Stores the last clipboard content to detect changes.
+"""
 import time
 import requests
 import clipboard
@@ -6,7 +16,25 @@ from plyer import notification
 API_URL = "http://127.0.0.1:8000/mcq"  # Backend FastAPI endpoint
 last_text = ""
 
+
 def send_to_api(question):
+    """Send MCQ question to the backend API for solving.
+
+    Sends a POST request to the FastAPI backend with the MCQ question
+    and returns the answer received from the API.
+
+    Args:
+        question (str): The MCQ question text to be solved.
+
+    Returns:
+        str: The answer from the backend (typically a single letter A, B, C, or D),
+             or an error message if the request fails.
+
+    Example:
+        >>> answer = send_to_api("What is 2+2? A)3 B)4 C)5 D)6")
+        >>> print(answer)
+        'B'
+    """
     try:
         resp = requests.post(API_URL, json={"question": question})
         
