@@ -11,10 +11,10 @@ Attributes:
 """
 from fastapi import FastAPI
 from dotenv import load_dotenv
-from .schemas import MCQRequest
+from schemas import MCQRequest
 import os
 import requests
-from .utils import build_prompt
+from utils import build_prompt
 
 load_dotenv()
 

@@ -26,8 +26,6 @@ print("MCQ Helper running... Highlight text & press CTRL+C to get answers instan
 while True:
     try:
         text = clipboard.paste().strip()
-
-        # Only act if clipboard changed and text length > 5 chars
         if text != last_text and len(text) > 5:
             last_text = text
 
@@ -39,9 +37,8 @@ while True:
 
             print("Answer:", answer)
 
-            # Notify Desktop
             notification.notify(
-                title="MCQ Answer",
+                title="",
                 message=answer,
                 timeout=5
             ) # type: ignore
@@ -49,4 +46,4 @@ while True:
     except Exception as e:
         print("Error:", e)
 
-    time.sleep(1)   # Check clipboard every second
+    time.sleep(1)
